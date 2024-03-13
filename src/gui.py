@@ -192,16 +192,7 @@ try_img = PhotoImage(file=try_path)
 try_button = Button(page1, image=try_img, bg='#FBFEFE', bd=0, command=lambda: show_frame(page2)).place(relx=0.5, rely=0.65, anchor=CENTER)
 
 
-############## PAGE 2: TXT INPUT ##############
-# def on_entry_click(event):
-#     if tawal_input.get() == 'X':
-#         tawal_input.delete(0, END)  # Hapus teks saat diklik
-#         tawal_input.config(fg='black')  # Ganti warna teks menjadi hitam
-
-# def on_focusout(event):
-#     if tawal_input.get() == '':
-#         tawal_input.insert(0, 'X')  # Tambahkan teks placeholder kembali
-#         tawal_input.config(fg='grey')  # Ganti warna teks menjadi abu-abu
+############## PAGE 2: GENERATOR ##############
 # Background
 page2.configure(bg='#FBFEFE')
 
