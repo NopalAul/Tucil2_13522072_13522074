@@ -50,59 +50,64 @@ subtitle_path = resource_path("assets/bjir.png")
 subtitle_img = PhotoImage(file=subtitle_path)
 Label(page1, image=subtitle_img, bg='#FBFEFE').pack(pady=(16, 0))
 
-# Quadratic
-quadratic_path = resource_path("assets/quadratic.png")
-quadratic_img = PhotoImage(file=quadratic_path)
-quadratic_button = Button(page1, image=quadratic_img, bg='#FBFEFE', bd=0, command=lambda: show_frame(page2)).place(relx=0.5, rely=0.63, anchor=CENTER)
+# Try me button
+try_path = resource_path("assets/tryme.png")
+try_img = PhotoImage(file=try_path)
+try_button = Button(page1, image=try_img, bg='#FBFEFE', bd=0, command=lambda: show_frame(page2)).place(relx=0.5, rely=0.63, anchor=CENTER)
 
 
 ############## PAGE 2: TXT INPUT ##############
-def on_entry_click(event):
-    if tawal_input.get() == 'X':
-        tawal_input.delete(0, END)  # Hapus teks saat diklik
-        tawal_input.config(fg='black')  # Ganti warna teks menjadi hitam
+# def on_entry_click(event):
+#     if tawal_input.get() == 'X':
+#         tawal_input.delete(0, END)  # Hapus teks saat diklik
+#         tawal_input.config(fg='black')  # Ganti warna teks menjadi hitam
 
-def on_focusout(event):
-    if tawal_input.get() == '':
-        tawal_input.insert(0, 'X')  # Tambahkan teks placeholder kembali
-        tawal_input.config(fg='grey')  # Ganti warna teks menjadi abu-abu
+# def on_focusout(event):
+#     if tawal_input.get() == '':
+#         tawal_input.insert(0, 'X')  # Tambahkan teks placeholder kembali
+#         tawal_input.config(fg='grey')  # Ganti warna teks menjadi abu-abu
 # Background
 page2.configure(bg='#FBFEFE')
 
 # Title
-title2_path = resource_path("assets/3titik.png")
+title2_path = resource_path("assets/generator.png")
 title2_img = PhotoImage(file=title2_path)
-Label(page2, image=title2_img, bg='#FBFEFE').pack(pady=(61, 0))
+Label(page2, image=title2_img, bg='#FBFEFE').place(x=443, y=73)
 
-# Titik awal
-tawal_path = resource_path("assets/tawal.png")
-tawal_img = PhotoImage(file=tawal_path)
-Label(page2, image=tawal_img, bg='#FBFEFE').place(x=60.8, y=171)
-tawal_input = Entry(page2, width=2, border=0, font=('Arial', 14))
-tawal_input.insert(0, 'X')
-tawal_input.bind('<FocusIn>', on_entry_click)  # Event binding saat entry ditekan
-tawal_input.bind('<FocusOut>', on_focusout)    # Event binding saat entry kehilangan fokus
-tawal_input.place(x=199, y=181)
+# Back button
+back_path = resource_path("assets/back2.png")
+back_img = PhotoImage(file=back_path)
+back_button = Button(page2, image=back_img, bg='#FBFEFE', bd=0, command=lambda: show_frame(page1)).place(x=84, y=84)
 
-# Titik kontrol
-tkontrol_path = resource_path("assets/tkontrol.png")
-tkontrol_img = PhotoImage(file=tkontrol_path)
-Label(page2, image=tkontrol_img, bg='#FBFEFE').place(x=60.8, y=240)
+# Input X
+x_input_path = resource_path("assets/x.png")
+x_input_img = PhotoImage(file=x_input_path)
+Label(page2, image=x_input_img, bg='#FBFEFE').place(x=84, y=170)
 
-# Titik akhir
-takhir_path = resource_path("assets/takhir.png")
-takhir_img = PhotoImage(file=takhir_path)
-Label(page2, image=takhir_img, bg='#FBFEFE').place(x=60.8, y=309)
+# Input Y
+y_input_path = resource_path("assets/y.png")
+y_input_img = PhotoImage(file=y_input_path)
+Label(page2, image=y_input_img, bg='#FBFEFE').place(x=84, y=240)
+
+# Add point button
+add_point_path = resource_path("assets/addpoint.png")
+add_point_img = PhotoImage(file=add_point_path)
+add_point_button = Button(page2, image=add_point_img, bg='#FBFEFE', bd=0).place(x=73, y=297)
+
+# Point container
+point_container_path = resource_path("assets/pointcontainer.png")
+point_container_img = PhotoImage(file=point_container_path)
+Label(page2, image=point_container_img, bg='#FBFEFE').place(x=49, y=361)
+
+# Iteration
+iteration_path = resource_path("assets/iteration.png")
+iteration_img = PhotoImage(file=iteration_path)
+Label(page2, image=iteration_img, bg='#FBFEFE').place(x=84, y=620)
 
 # Generate button
 generate_path = resource_path("assets/generate.png")
 generate_img = PhotoImage(file=generate_path)
-generate_button = Button(page2, image=generate_img, bg='#FBFEFE', bd=0).place(x=81.81, y=460)
-
-# Back button
-back_path = resource_path("assets/back.png")
-back_img = PhotoImage(file=back_path)
-back_button = Button(page2, image=back_img, bg='#FBFEFE', bd=0, command=lambda: show_frame(page1)).place(x=81.81, y=523)
+generate_button = Button(page2, image=generate_img, bg='#FBFEFE', bd=0).place(x=400, y=600)
 
 
 # Container hasil
@@ -113,7 +118,7 @@ Label(page2, image=hasil_img, bg='#FBFEFE').place(x=339, y=162)
 # Waktu eksekusi
 time_path = resource_path("assets/time.png")
 time_img = PhotoImage(file=time_path)
-Label(page2, image=time_img, bg='#FBFEFE').place(x=523, y=595)
+Label(page2, image=time_img, bg='#FBFEFE').place(x=658, y=599)
 
 
 # END
