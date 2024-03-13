@@ -3,7 +3,6 @@ import matplotlib.pyplot as plt
 from matplotlib.backends.backend_tkagg import FigureCanvasTkAgg
 import matplotlib.animation as animation
 from tkinter import *
-from tkinter import filedialog
 from tkinter import messagebox
 from time import process_time
 import os
@@ -118,7 +117,21 @@ def animate_curve(frame):
 
 def plot_bezier_curve():
     global points, iterations
-    iterations = int(iteration_entry.get())
+    # Validasi titik
+    if len(points) < 3:
+        messagebox.showerror("Error", "Please input at least 3 points")
+        return
+    
+    # Validasi input
+    iteration_str = iteration_entry.get()
+    if iteration_str == '':
+        messagebox.showerror("Error", "Please input the number of iterations")
+        return
+    try:
+        iterations = int(iteration_str)
+    except ValueError:
+        messagebox.showerror("Error", "Iterations must be a number")
+        return
 
     if len(points) == 3:
         ani = animation.FuncAnimation(fig, animate_curve, frames=iterations, repeat=False)
@@ -130,8 +143,22 @@ def plot_bezier_curve():
     canvas.draw()
 
 def add_point():
-    x = float(x_entry.get())
-    y = float(y_entry.get())
+    x_str = x_entry.get()
+    y_str = y_entry.get()
+
+    # Validasi input
+    if x_str == '':
+        messagebox.showerror("Error", "Please input X coordinate")
+        return
+    if y_str == '':
+        messagebox.showerror("Error", "Please input Y coordinate")
+        return
+    try:
+        x = float(x_str)
+        y = float(y_str)
+    except ValueError:
+        messagebox.showerror("Error", "X and Y must be a number")
+        return
     points.append([x, y])
     point_listbox.insert(END, f"({x}, {y})")
 
