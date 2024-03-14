@@ -226,39 +226,39 @@ page2.configure(bg='#FBFEFE')
 # Title
 title2_path = resource_path("assets/generator.png")
 title2_img = PhotoImage(file=title2_path)
-Label(page2, image=title2_img, bg='#FBFEFE').place(x=443, y=73)
+Label(page2, image=title2_img, bg='#FBFEFE').place(x=408, y=73)
 
 # Back button
 back_path = resource_path("assets/back2.png")
 back_img = PhotoImage(file=back_path)
-back_button = Button(page2, image=back_img, bg='#FBFEFE', bd=0, command=lambda: show_frame(page1)).place(x=84, y=84)
+back_button = Button(page2, image=back_img, bg='#FBFEFE', bd=0, command=lambda: show_frame(page1)).place(x=52, y=84)
 
 # Input X
 x_input_path = resource_path("assets/x.png")
 x_input_img = PhotoImage(file=x_input_path)
-Label(page2, image=x_input_img, bg='#FBFEFE').place(x=84, y=170)
+Label(page2, image=x_input_img, bg='#FBFEFE').place(x=52, y=170)
 x_entry = Entry(page2, width=3, font=('Arial', 12), border=0, bg='#F8EDEE')
-x_entry.place(x=218, y=184)
+x_entry.place(x=188, y=184)
 
 # Input Y
 y_input_path = resource_path("assets/y.png")
 y_input_img = PhotoImage(file=y_input_path)
-Label(page2, image=y_input_img, bg='#FBFEFE').place(x=84, y=240)
+Label(page2, image=y_input_img, bg='#FBFEFE').place(x=52, y=240)
 y_entry = Entry(page2, width=3, font=('Arial', 12), border=0, bg='#F8EDEE')
-y_entry.place(x=218, y=254)
+y_entry.place(x=188, y=254)
 
 # Add point button
 add_point_path = resource_path("assets/addpoint.png")
 add_point_img = PhotoImage(file=add_point_path)
 add_point_button = Button(page2, image=add_point_img, bg='#FBFEFE', bd=0, command=add_point)
-add_point_button.place(x=73, y=297)
+add_point_button.place(x=41, y=297)
 
 # Point container
 point_container_path = resource_path("assets/pointcontainer.png")
 point_container_img = PhotoImage(file=point_container_path)
-Label(page2, image=point_container_img, bg='#FBFEFE').place(x=49, y=361)
-point_listbox = Listbox(page2, width=26, height=11, font=('Arial', 12), border=0, bg='#F8EDEE')
-point_listbox.place(x=56, y=372)
+Label(page2, image=point_container_img, bg='#FBFEFE').place(x=52, y=361)
+point_listbox = Listbox(page2, width=18, height=10, font=('Arial', 12), border=0, bg='#F8EDEE')
+point_listbox.place(x=58, y=372)
 
 # Iteration
 iteration_path = resource_path("assets/iteration.png")
@@ -282,7 +282,7 @@ reset_button.place(x=465, y=600)
 # Container hasil
 hasil_path = resource_path("assets/hasil.png")
 hasil_img = PhotoImage(file=hasil_path)
-Label(page2, image=hasil_img, bg='#FBFEFE').place(x=339, y=162)
+Label(page2, image=hasil_img, bg='#FBFEFE').place(x=272, y=133)
 
 # Waktu eksekusi
 time_path = resource_path("assets/time.png")
@@ -294,7 +294,7 @@ time_result.place(x=780, y=648)
 # Figure
 fig, ax = plt.subplots()
 canvas = FigureCanvasTkAgg(fig, master=page2)
-canvas.get_tk_widget().place(x=350, y=171, width=558, height=395)
+canvas.get_tk_widget().place(x=280, y=140, width=630, height=430)
 
 # Global Variables
 points = []
