@@ -77,7 +77,7 @@ def animate_curve(frame):
     ax.plot(x, y, marker='o', linestyle='-')
 
     # Plot titik kontrol
-    ax.scatter([point[0] for point in points], [point[1] for point in points], color='red')
+    ax.plot([point[0] for point in points], [point[1] for point in points], marker='o', linestyle='--', color='red')
 
     # Menambahkan label
     ax.set_title('Bezier Curve (Iteration {})'.format(frame + 1))
