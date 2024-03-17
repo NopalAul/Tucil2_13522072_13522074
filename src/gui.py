@@ -67,6 +67,8 @@ def animate_curve(frame):
     timer = round((end - start)*1000, 2)
     time_result.config(text=f"{timer} ms")
 
+    # print(f'timer: {timer} ms')
+
     x = [point[0] for point in curve_points]
     y = [point[1] for point in curve_points]
 
@@ -103,13 +105,7 @@ def plot_bezier_curve():
         messagebox.showerror("Error", "Iterations must be a number")
         return
 
-    # # Start time
-    # start = process_time()
     ani = animation.FuncAnimation(fig, animate_curve, frames=iterations, repeat=False)
-    # # End time
-    # end = process_time()
-    # timer = round((end - start)*1000, 2)
-    # time_result.config(text=f"{timer} ms")
 
     canvas.draw()
 
