@@ -10,88 +10,62 @@ import sys
 
 
 ################### ALGORITMA ###################
-def bezier_quadratic_divide_and_conquer(P0, P1, P2, iterations):
+def generate_control_points(points):
+    control_points = []
+    for i in range(len(points) - 1):
+        control_points.append((points[i] + points[i + 1]) / 2)
+    if len(control_points) > 1:
+        recursive_control_points = generate_control_points(control_points)
+        control_points.extend(recursive_control_points)
+    return control_points
+
+def divide_and_conquer(points, iterations):
     if iterations == 0:
-        return [P0, P2]
+        return [points[0], points[-1]]
 
-    # Menemukan titik kontrol tengah
-    Q0 = (P0 + P1) / 2
-    Q1 = (P1 + P2) / 2
-    R = (Q0 + Q1) / 2
+    control_points = generate_control_points(points)
+    mid_point = control_points[-1]
 
-    # Rekursi pada submasalah
-    left_points = bezier_quadratic_divide_and_conquer(P0, Q0, R, iterations - 1)
-    right_points = bezier_quadratic_divide_and_conquer(R, Q1, P2, iterations - 1)
+    array_left_points = []
+    array_left_points.append(points[0])
+    array_left_points.append(control_points[0])
 
-    # Menggabungkan hasil dari kedua submasalah
-    return left_points[:-1] + [R] + right_points
+    len_points = len(points)
+    i = len_points - 1
+    while i < len(control_points):
+        array_left_points.append(control_points[i])
+        len_points -= 1
+        i += len_points - 1
 
-def bezier_cubic_divide_and_conquer(P0, P1, P2, P3, iterations):
-    if iterations == 0:
-        return [P0, P3]
+    array_right_points = []
+    control_points.reverse()
+    array_right_points.append(control_points[0])
+    array_right_points.append(control_points[1])
 
-    # Menemukan titik kontrol tengah
-    Q0 = (P0 + P1) / 2
-    Q1 = (P1 + P2) / 2
-    Q2 = (P2 + P3) / 2
-    R0 = (Q0 + Q1) / 2
-    R1 = (Q1 + Q2) / 2
-    S = (R0 + R1) / 2
+    start_index = 3
+    i = start_index
+    while i < len(control_points):
+        array_right_points.append(control_points[i])
+        i += start_index
+        start_index += 1
+    
+    array_right_points.append(points[-1])
 
-    # Rekursi pada submasalah
-    left_points = bezier_cubic_divide_and_conquer(P0, Q0, R0, S, iterations - 1)
-    right_points = bezier_cubic_divide_and_conquer(S, R1, Q2, P3, iterations - 1)
+    left_points = divide_and_conquer(array_left_points, iterations - 1)
+    right_points = divide_and_conquer(array_right_points, iterations - 1)
 
-    # Menggabungkan hasil dari kedua submasalah
-    return left_points[:-1] + [S] + right_points
-
-def bezier_quartic_divide_and_conquer(P0, P1, P2, P3, P4, iterations):
-    if iterations == 0:
-        return [P0, P4]
-
-    # Menemukan titik kontrol tengah
-    Q0 = (P0 + P1) / 2
-    Q1 = (P1 + P2) / 2
-    Q2 = (P2 + P3) / 2
-    Q3 = (P3 + P4) / 2
-    R0 = (Q0 + Q1) / 2
-    R1 = (Q1 + Q2) / 2
-    R2 = (Q2 + Q3) / 2
-    S0 = (R0 + R1) / 2
-    S1 = (R1 + R2) / 2
-    T = (S0 + S1) / 2
-
-    # Rekursi pada submasalah
-    left_points = bezier_quartic_divide_and_conquer(P0, Q0, R0, S0, T, iterations - 1)
-    right_points = bezier_quartic_divide_and_conquer(T, S1, R2, Q3, P4, iterations - 1)
-
-    # Menggabungkan hasil dari kedua submasalah
-    return left_points[:-1] + [T] + right_points
+    return left_points[:-1] + [mid_point] +  right_points
 
 def animate_curve(frame):
     global points, iterations, ax, canvas
 
     # Start time
     start = process_time()
-
-    if len(points) == 3:
-        P0 = np.array(points[0])
-        P1 = np.array(points[1])
-        P2 = np.array(points[2])
-        curve_points = bezier_quadratic_divide_and_conquer(P0, P1, P2, frame + 1)
-    elif len(points) == 4:
-        P0 = np.array(points[0])
-        P1 = np.array(points[1])
-        P2 = np.array(points[2])
-        P3 = np.array(points[3])
-        curve_points = bezier_cubic_divide_and_conquer(P0, P1, P2, P3, frame + 1)
-    elif len(points) == 5:
-        P0 = np.array(points[0])
-        P1 = np.array(points[1])
-        P2 = np.array(points[2])
-        P3 = np.array(points[3])
-        P4 = np.array(points[4])
-        curve_points = bezier_quartic_divide_and_conquer(P0, P1, P2, P3, P4, frame + 1)
+    curve_points = divide_and_conquer(points, frame + 1)
+    # End time
+    end = process_time()
+    timer = round((end - start)*1000, 2)
+    time_result.config(text=f"{timer} ms")
 
     x = [point[0] for point in curve_points]
     y = [point[1] for point in curve_points]
@@ -110,10 +84,6 @@ def animate_curve(frame):
 
     canvas.draw()
 
-    # End time
-    end = process_time()
-    timer = round((end - start)*1000, 2)
-    time_result.config(text=f"{timer} ms")
 
 def plot_bezier_curve():
     global points, iterations
@@ -133,12 +103,13 @@ def plot_bezier_curve():
         messagebox.showerror("Error", "Iterations must be a number")
         return
 
-    if len(points) == 3:
-        ani = animation.FuncAnimation(fig, animate_curve, frames=iterations, repeat=False)
-    elif len(points) == 4:
-        ani = animation.FuncAnimation(fig, animate_curve, frames=iterations, repeat=False)
-    elif len(points) == 5:
-        ani = animation.FuncAnimation(fig, animate_curve, frames=iterations, repeat=False)
+    # # Start time
+    # start = process_time()
+    ani = animation.FuncAnimation(fig, animate_curve, frames=iterations, repeat=False)
+    # # End time
+    # end = process_time()
+    # timer = round((end - start)*1000, 2)
+    # time_result.config(text=f"{timer} ms")
 
     canvas.draw()
 
@@ -159,7 +130,8 @@ def add_point():
     except ValueError:
         messagebox.showerror("Error", "X and Y must be a number")
         return
-    points.append([x, y])
+    point = np.array([x, y])
+    points.append(point)
     point_listbox.insert(END, f"({x}, {y})")
 
 def reset_points():

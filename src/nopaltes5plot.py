@@ -1,5 +1,9 @@
 import numpy as np
 import matplotlib.pyplot as plt
+from  time import process_time
+
+# Start time
+start = process_time()
 
 def generate_control_points(points):
     control_points = []
@@ -50,16 +54,22 @@ def divide_and_conquer(points, iterations):
 # Contoh penggunaan
 # points = np.array([[0, 0], [1.5, 4], [4, 0]])
 points = np.array([[0, 0], [1.5, 4], [4, 0], [5,3]])
-iterations = 3
+iterations = 12
 result = divide_and_conquer(points, iterations)
 
-# Visualisasi plot kurva
-result = np.array(result)
-plt.plot(result[:, 0], result[:, 1], '-o', label='Bezier Curve')
-plt.scatter(points[:, 0], points[:, 1], color='red', label='Control Points')
-plt.title('Bezier Curve with Control Points')
-plt.xlabel('X')
-plt.ylabel('Y')
-plt.legend()
-plt.grid(True)
-plt.show()
+# End time
+end = process_time()
+timer = round((end - start)*1000, 2)
+# time_result.config(text=f"{timer} ms")
+print(f'time: {timer} ms')
+
+# # Visualisasi plot kurva
+# result = np.array(result)
+# plt.plot(result[:, 0], result[:, 1], '-o', label='Bezier Curve')
+# plt.scatter(points[:, 0], points[:, 1], color='red', label='Control Points')
+# plt.title('Bezier Curve with Control Points')
+# plt.xlabel('X')
+# plt.ylabel('Y')
+# plt.legend()
+# plt.grid(True)
+# plt.show()
