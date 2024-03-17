@@ -20,11 +20,15 @@ def generate_control_points(points):
     return control_points
 
 def divide_and_conquer(points, iterations):
+    global all_points
+
     if iterations == 0:
         return [points[0], points[-1]]
 
     control_points = generate_control_points(points)
     mid_point = control_points[-1]
+
+    all_points.append(control_points)
 
     array_left_points = []
     array_left_points.append(points[0])
@@ -57,7 +61,7 @@ def divide_and_conquer(points, iterations):
     return left_points[:-1] + [mid_point] +  right_points
 
 def animate_curve(frame):
-    global points, iterations, ax, canvas
+    global points, all_points, iterations, ax, canvas
 
     # Start time
     start = process_time()
@@ -69,15 +73,22 @@ def animate_curve(frame):
 
     # print(f'timer: {timer} ms')
 
-    x = [point[0] for point in curve_points]
-    y = [point[1] for point in curve_points]
-
-    # Plot kurva Bezier
     ax.clear()
-    ax.plot(x, y, marker='o', linestyle='-')
 
     # Plot titik kontrol
     ax.plot([point[0] for point in points], [point[1] for point in points], marker='o', linestyle='--', color='red')
+
+    # print(all_points, end='\n')
+    for point in all_points:
+        x = [point[0] for point in point]
+        y = [point[1] for point in point]
+        ax.plot(x, y, marker='o', linestyle='-', alpha=0.5)
+    all_points.clear()
+
+    # Plot kurva Bezier
+    x = [point[0] for point in curve_points]
+    y = [point[1] for point in curve_points]
+    ax.plot(x, y, marker='o', linestyle='-', color='blue')
 
     # Menambahkan label
     ax.set_title('Bezier Curve (Iteration {})'.format(frame + 1))
@@ -88,7 +99,7 @@ def animate_curve(frame):
 
 
 def plot_bezier_curve():
-    global points, iterations
+    global points, all_points, iterations
     # Validasi titik
     if len(points) < 3:
         messagebox.showerror("Error", "Please input at least 3 points")
@@ -131,8 +142,9 @@ def add_point():
     point_listbox.insert(END, f"({x}, {y})")
 
 def reset_points():
-    global points
+    global points, all_points
     points = []
+    all_points = []
     point_listbox.delete(0, END)
 
 
@@ -266,6 +278,7 @@ canvas.get_tk_widget().place(x=280, y=140, width=630, height=430)
 
 # Global Variables
 points = []
+all_points = []
 
 # END
 window.mainloop()
