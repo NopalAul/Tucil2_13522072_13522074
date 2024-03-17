@@ -22,7 +22,7 @@ def bezier_curve_brute_force(points, iterations):
     n_point = (2 ** iterations) + 1
 
     print("ALGORITMA BRUTE FORCE")
-    print(f'Jumlah iterasi  : {iterations}')
+    print(f'Jumlah iterasi  : {iterations} (ekivalensi iterasi DnC)')
     print(f'Jumlah titik    : {n_point}')
 
     # Array untuk menyimpan titik-titik pada kurva Bezier
