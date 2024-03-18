@@ -18,9 +18,7 @@ Pada program ini, dilakukan pembangkitan kurva Bézier dengan menggunakan pendek
 
 
 ## Screenshots <a href="screenshots"></a>
-![Example screenshot](./readme_img/txt.gif)
 ![Example screenshot](bjir.gif)
-![Example screenshot](./readme_img/2.png)
 
 ## Dependencies <a href="dependencies"></a>
 - Python 3.x
@@ -34,7 +32,7 @@ Pada program ini, dilakukan pembangkitan kurva Bézier dengan menggunakan pendek
     ```
     \Tucil2_13522072_13522074\bin\dist\bjir.exe
     ```
-3. Jalankan program dengan double click pada file `bjir.exe`, akan langsung terbuka tampilan awal GUI program. Klik tombol `TRY ME` untuk memulai
+3. Jalankan program dengan double click pada file `bjir.exe`, tunggu hingga terbuka tampilan awal GUI program. Klik tombol `TRY ME` untuk memulai
 4. Pada program, masukkan input pada kolom putih yang tersedia. Langkahnya adalah sebagai berikut:
     - Ketik nilai untuk absis X
     - Ketik nilai untuk ordinat Y
