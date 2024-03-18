@@ -19,7 +19,7 @@ Pada program ini, dilakukan pembangkitan kurva Bézier dengan menggunakan pendek
 
 ## Screenshots <a href="screenshots"></a>
 ![Example screenshot](./readme_img/txt.gif)
-![Example screenshot](./readme_img/auto.gif)
+![Example screenshot](bjir.gif)
 ![Example screenshot](./readme_img/2.png)
 
 ## Dependencies <a href="dependencies"></a>
