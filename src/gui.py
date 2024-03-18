@@ -10,6 +10,7 @@ import sys
 
 
 ################### ALGORITMA ###################
+# Pembuat titik kontrol tengah
 def generate_control_points(points):
     control_points = []
     for i in range(len(points) - 1):
@@ -19,17 +20,21 @@ def generate_control_points(points):
         control_points.extend(recursive_control_points)
     return control_points
 
+# Divide and Conquer kurva Bezier
 def divide_and_conquer(points, iterations):
     global all_points
 
+    # Basis case
     if iterations == 0:
         return [points[0], points[-1]]
 
+    # Membuat titik kontrol tengah
     control_points = generate_control_points(points)
     mid_point = control_points[-1]
 
     all_points.append(control_points)
 
+    # Kumpulan titik bagian kiri
     array_left_points = []
     array_left_points.append(points[0])
     array_left_points.append(control_points[0])
@@ -41,6 +46,7 @@ def divide_and_conquer(points, iterations):
         len_points -= 1
         i += len_points - 1
 
+    # Kumpulan titik bagian kanan
     array_right_points = []
     control_points.reverse()
     array_right_points.append(control_points[0])
@@ -55,11 +61,14 @@ def divide_and_conquer(points, iterations):
     
     array_right_points.append(points[-1])
 
+    # Rekursi pada bagian kiri dan kanan
     left_points = divide_and_conquer(array_left_points, iterations - 1)
     right_points = divide_and_conquer(array_right_points, iterations - 1)
 
+    # Menggabungkan hasil dari kedua submasalah
     return left_points[:-1] + [mid_point] +  right_points
 
+# Animasi proses pembentukan plot kurva Bezier
 def animate_curve(frame):
     global points, all_points, iterations, ax, canvas
 
@@ -71,14 +80,11 @@ def animate_curve(frame):
     timer = round((end - start)*1000, 2)
     time_result.config(text=f"{timer} ms")
 
-    # print(f'timer: {timer} ms')
-
     ax.clear()
 
     # Plot titik kontrol
     ax.plot([point[0] for point in points], [point[1] for point in points], marker='o', linestyle='--', color='red')
 
-    # print(all_points, end='\n')
     for point in all_points:
         x = [point[0] for point in point]
         y = [point[1] for point in point]
@@ -97,7 +103,7 @@ def animate_curve(frame):
 
     canvas.draw()
 
-
+# Plot kurva Bezier
 def plot_bezier_curve():
     global points, all_points, iterations
     # Validasi titik
@@ -116,10 +122,12 @@ def plot_bezier_curve():
         messagebox.showerror("Error", "Iterations must be a number")
         return
 
+    # Membuat plot kurva Bezier
     ani = animation.FuncAnimation(fig, animate_curve, frames=iterations, repeat=False)
 
     canvas.draw()
 
+# Menambahkan titik kontrol masukan
 def add_point():
     x_str = x_entry.get()
     y_str = y_entry.get()
@@ -141,6 +149,7 @@ def add_point():
     points.append(point)
     point_listbox.insert(END, f"({x}, {y})")
 
+# Menghapus ulang semua titik kontrol
 def reset_points():
     global points, all_points
     points = []
@@ -148,13 +157,15 @@ def reset_points():
     point_listbox.delete(0, END)
 
 
+
+
+################### TKINTER GUI ###################
 # ASSETS PATH
 def resource_path(relative_path):
     base_path = getattr(sys, '_MEIPASS', os.path.dirname(os.path.abspath(__file__)))
     return os.path.join(base_path, relative_path)
 
-
-################### TKINTER GUI ###################
+# Main window
 window = Tk()
 widht = 990
 height = 704
