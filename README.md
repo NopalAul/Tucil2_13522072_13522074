@@ -18,7 +18,7 @@ Pada program ini, dilakukan pembangkitan kurva Bézier dengan menggunakan pendek
 
 
 ## Screenshots <a href="screenshots"></a>
-![Example screenshot](bjir.gif)
+![Example screenshot](./test/bjir.gif)
 
 ## Dependencies <a href="dependencies"></a>
 - Python 3.x
@@ -41,3 +41,5 @@ Pada program ini, dilakukan pembangkitan kurva Bézier dengan menggunakan pendek
     - Klik `GENERATE` untuk menghasilkan kurva Bézier
 5. Jika ingin melakukan generate ulang, klik tombol `R E S E T` dan masukkan kembali input yang diinginkan
 6. Close program untuk mengakhiri
+7. Untuk melakukan perbandingan dengan algoritma _brute force_, dapat dijalankan file `bruteforce.py` pada folder `src`
+   * _catatan: tinggal masukan iterasi yang sama dengan iterasi pada algoritma DnC, akan otomatis dibuat ekivalensi titiknya pada algoritma brute force_
