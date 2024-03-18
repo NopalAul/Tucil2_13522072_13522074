@@ -32,7 +32,7 @@ Pada program ini, dilakukan pembangkitan kurva Bézier dengan menggunakan pendek
     ```
 2. Buka file directory/location tempat repository berada, buka folder `bin`, buka folder `dist`, hingga ditemukan file `bjir.exe`
     ```
-    \Tucil1_13522074\bin\dist\cyberpunk77.exe
+    \Tucil2_13522072_13522074\bin\dist\bjir.exe
     ```
 3. Jalankan program dengan double click pada file `bjir.exe`, akan langsung terbuka tampilan awal GUI program. Klik tombol `TRY ME` untuk memulai
 4. Pada program, masukkan input pada kolom putih yang tersedia. Langkahnya adalah sebagai berikut:
