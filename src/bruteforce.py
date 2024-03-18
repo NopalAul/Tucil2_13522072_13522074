@@ -35,9 +35,11 @@ def bezier_curve_brute_force(points, iterations):
 
     return curve_points
 
-# Penggunaan
-points = np.array([[0, 0], [1.5, 4], [4, 0], [5, 3]])
-iterations = 11
+# input titik dan iterasi 
+points_input = input("Masukkan titik-titik kontrol (pisahkan dengan spasi, misal: 0,0 1.5,4 4,0 5,-3): ")
+points = np.array([[float(coord) for coord in point.split(',')] for point in points_input.split()])
+iterations = int(input("Masukkan jumlah iterasi: "))
+print()
 
 # Start time
 start = process_time()
